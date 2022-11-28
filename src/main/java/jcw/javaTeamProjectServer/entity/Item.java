@@ -23,6 +23,4 @@ public class Item {
     private String itemAddress;
     private String itemCategory;
     private String itemPhone;
-//    private String itemImage;
-//    private int itemLimitCount;
 }

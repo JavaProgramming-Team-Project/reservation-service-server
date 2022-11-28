@@ -17,8 +17,8 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewKey;
 
-    private Long memberId;
-    private Long itemId;
+    private Long memberKey;
+    private Long itemKey;
     private int reviewStar;
     private String reviewBody;
     private String reviewDate;

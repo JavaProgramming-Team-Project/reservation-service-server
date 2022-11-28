@@ -1,5 +1,6 @@
 package jcw.javaTeamProjectServer.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,16 +13,24 @@ import javax.persistence.*;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_key")
-    private Long id;
+    private Long memberKey;
 
     private String memberId;
-    @Column(name = "member_password")
-    private String password;
-    @Column(name = "member_name")
-    private String name;
-    @Column(name = "member_phone")
-    private String phone;
-    @Column(name = "member_age")
-    private int age;
+    private String memberPassword;
+    private String memberName;
+    private String memberPhone;
+    private int memberAge;
+
+    public Member(Long memberKey, String memberId, String memberPassword, String memberName, String memberPhone, int memberAge) {
+        this.memberKey = memberKey;
+        this.memberId = memberId;
+        this.memberPassword = memberPassword;
+        this.memberName = memberName;
+        this.memberPhone = memberPhone;
+        this.memberAge = memberAge;
+    }
+
+    public Member() {
+
+    }
 }
