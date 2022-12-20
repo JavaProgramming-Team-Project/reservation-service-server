@@ -1,8 +1,6 @@
 package jcw.javaTeamProjectServer.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +10,8 @@ import javax.persistence.Id;
 @Entity
 @Getter @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +21,5 @@ public class Book {
     private Long itemKey;
     private String bookDate; //예약 시점 일자
     private String itemDate; //상품 예약일
+    private int bookPrice;
 }

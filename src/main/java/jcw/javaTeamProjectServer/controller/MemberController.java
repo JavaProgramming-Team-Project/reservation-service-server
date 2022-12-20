@@ -2,8 +2,8 @@ package jcw.javaTeamProjectServer.controller;
 
 import jcw.javaTeamProjectServer.entity.Member;
 import jcw.javaTeamProjectServer.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,24 +12,24 @@ import java.util.Optional;
 @Slf4j
 @RestController
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class MemberController {
 
-    @Autowired
-    MemberService memberService;
+    private final MemberService memberService;
 
     /**
      * 회원가입
      */
     @PostMapping("/signup")
-    public void signUp(@RequestBody Member member) {
+    public void signUp(@RequestBody final Member member) {
         memberService.join(member);
     }
 
     /**
      * 로그인
      */
-    @GetMapping("/{id}")
-    public Member login(@PathVariable("id") String id, @RequestParam("password") String password) {
+    @GetMapping("/login/{id}")
+    public Member login(@PathVariable("id") final String id, @RequestParam("password") final String password) {
         Optional<Member> member = memberService.findByMemberId(id);
         if (member.isPresent()) {
             if (member.get().getMemberPassword().equals(password)) {
@@ -53,4 +53,13 @@ public class MemberController {
         return memberService.memberList();
     }
 
+    @GetMapping("/{id}")
+    public Member findMember(@PathVariable("id") Long memberKey) {
+        Optional<Member> optionalMember = memberService.findById(memberKey);
+        if (optionalMember.isPresent()) {
+            return optionalMember.get();
+        } else {
+            throw new IllegalArgumentException("존재하지 않는 회원입니다.");
+        }
+    }
 }
